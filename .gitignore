@@ -1,4 +1,4 @@
-# IntelliJ IDEA project directories and non-source files
+# JetBrains Clion project directories and non-source files
 .idea
 cmake-build-debug
 
