@@ -1,6 +1,7 @@
 # JetBrains Clion project directories and non-source files
 .idea
 cmake-build-debug
+CMakeLists.txt
 
 # Prerequisites
 *.d
