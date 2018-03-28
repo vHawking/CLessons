@@ -1,5 +1,5 @@
 /**
- * ƒомашнее задание курса "јлгоритмы и структуры данных".
+ * ƒомашнее задание по курсу "јлгоритмы и структуры данных".
  *
  * @version Ћекци€ є1.
  * @author ¬адим ястребов.
@@ -9,12 +9,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <locale.h>
-
-
-#define FULL_ANSWER 0
-#define ONE_ROOT 1
-#define NO_ROOTS 2
-#define NOT_SQUARE 3
 
 /*
  * 1. ¬вести вес и рост человека. –ассчитать и вывести индекс массы тела по формуле I = m / (h * h);
@@ -65,23 +59,23 @@ float squareRoot(float n) {
     return x;
 }
 
-int quadEquation(float a, float b, float c, float *x1, float *x2) {
+char* quadEquation(float a, float b, float c, float *root1, float *root2) {
     if (a != 0) {
         float d = b * b - 4 * a * c;
 
         if (d > 0) {
-            *x1 = (-b + squareRoot(d)) / (2 * a);
-            *x2 = (-b - squareRoot(d)) / (2 * a);
-            return FULL_ANSWER;
+            *root1 = (-b + squareRoot(d)) / (2 * a);
+            *root2 = (-b - squareRoot(d)) / (2 * a);
+            return "FULL_ANSWER";
         } else if (d == 0) {
-            *x1 = -b / 2 * a;
-            return ONE_ROOT;
+            *root1 = -b / 2 * a;
+            return "ONE_ROOT";
         } else {
-            return NO_ROOTS;
+            return "NO_ROOTS";
         }
     } else {
-        *x1 = -c / b;
-        return NOT_SQUARE;
+        *root1 = -c / b;
+        return "NOT_SQUARE";
     }
 }
 
@@ -125,18 +119,6 @@ char *agesAdd(int age) {
  * 6.* — клавиатуры ввод€тс€ числовые координаты двух полей шахматной доски (x1, y1, x2, y2). “ребуетс€ определить,
  * относ€тс€ ли к пол€ к одному цвету или нет.
  */
-
-//char *checkColorCells(int x1, int y1) {
-//    return (x1 + y1) % 2 == 0 ? "чЄрный" : "белый";
-//}
-//
-//char *checkCells(int x1, int x2, int y1, int y2) {
-//    if ((x1 + y1) % 2 == (x2 + y2) % 2) {
-//        return "одинаковый";
-//    } else {
-//        return "не совпадает";
-//    }
-//}
 
 char *checkCells(int x1, int x2, int y1, int y2) {
     if ((x1 + y1) % 2 == (x2 + y2) % 2) {
@@ -265,100 +247,81 @@ int main() {
 
     // Ex. 1
 
-//    float height = 171;
-//    float weight 72;
-//
-//    printf("¬аш индекс массы тела (BMI) равен %.2f\n\n", bmiCalc(height, weight));
-//
-//    // Ex. 2
-//
-//    int x = 11, y = 77;
-//    printf("»нициалированы переменные: x = %d, y = %d.", x, y);
-//    swapVars1(&x, &y);
-//    printf("\nѕеременные после обмена значени€ми: x = %d, y = %d.\n\n", x, y);
-//
-//    // Ex. 2*
-//
-//    printf("»нициалированы переменные: x = %d, y = %d.", x, y);
-//    swapVars2(&x, &y);
-//    printf("\nѕеременные после обмена значени€ми: x = %d, y = %d.\n\n", x, y);
-//
-//    // Ex. 3
-//
-//    float a, b, c, x1, x2;
-//
-//    printf("¬ведите коэффициент a: ");
-//    scanf("%f", &a);
-//    printf("¬ведите коэффициент b: ");
-//    scanf("%f", &b);
-//    printf("¬ведите коэффициент c: ");
-//    scanf("%f", &c);
-//
-//    printf("\n вадратное уравнение вида: ax*x + bx + c = 0;\n");
-//
-//    switch (quadEquation(a, b, c, &x1, &x2)) {
-//        case FULL_ANSWER:
-//            printf("”равнение имеет два корн€ x1 = %.2f, x2 = %.2f.\n", x1, x2);
-//            break;
-//        case ONE_ROOT:
-//            printf("”равнение имеет один корень x1 = %.2f.\n", x1);
-//            break;
-//        case NO_ROOTS:
-//            printf("”равнение не имеет корней.\n");
-//            break;
-//        case NOT_SQUARE:
-//            printf("”равнение не €вл€етс€ квадратным, но имеет корень x1 = %.2f.\n", x1);
-//            break;
-//        default:
-//            printf("Unexpected function behavior.\n");
-//    }
-//
-//    // Ex. 4
-//
-//    int m;
-//
-//    do {
-//        printf("\n¬ведите номер мес€ца от 1 до 12, или введите 0 дл€ выхода: ");
-//        scanf("%d", &m);
-//
-//        if (m >= 0 && m <= 12) {
-//            printf("Ёто %s.\n", seasonsDetection(m));
-//            break;
-//        } else if (m == 0) {
-//            printf("«авершение работы...");
-//            break;
-//        } else {
-//            printf("¬ведЄн некорректный номер мес€ца.\n");
-//        }
-//    } while (m < 0 || m > 12);
-//
-//    // Ex. 5
-//
-//    int age;
-//
-//    printf("\n¬ведите свой возраст: ");
-//    scanf("%d", &age);
-//
-//    printf("¬ам %d %s.\n", age, agesAdd(age));
-//
+    float height = 171;
+    float weight = 72;
+
+    printf("¬аш индекс массы тела (BMI) равен %.2f\n\n", bmiCalc(height, weight));
+
+    // Ex. 2
+
+    int x = 11, y = 77;
+    printf("»нициалированы переменные: x = %d, y = %d.", x, y);
+    swapVars1(&x, &y);
+    printf("\nѕеременные после обмена значени€ми: x = %d, y = %d.\n\n", x, y);
+
+    // Ex. 2*
+
+    printf("»нициалированы переменные: x = %d, y = %d.", x, y);
+    swapVars2(&x, &y);
+    printf("\nѕеременные после обмена значени€ми: x = %d, y = %d.\n\n", x, y);
+
+    // Ex. 3
+
+    float a, b, c, root1, root2;
+
+    printf("¬ведите коэффициент a: ");
+    scanf("%f", &a);
+    printf("¬ведите коэффициент b: ");
+    scanf("%f", &b);
+    printf("¬ведите коэффициент c: ");
+    scanf("%f", &c);
+
+    printf("\n вадратное уравнение вида: ax^2 + bx + c = 0;\n");
+
+
+    char *solution = quadEquation(a, b, c, &root1, &root2);
+    if (solution == "FULL_ANSWER") {
+        printf("”равнение имеет два корн€ x1 = %.2f, x2 = %.2f.\n", root1, root2);
+    } else if (solution == "ONE_ROOT") {
+        printf("”равнение имеет один корень x1 = %.2f.\n", root1);
+    } else if (solution == "NO_ROOTS") {
+        printf("”равнение не имеет корней.\n");
+    } else if (solution == "NOT_SQUARE") {
+        printf("”равнение не €вл€етс€ квадратным, но имеет корень x1 = %.2f.\n", root1);
+    } else {
+        printf("Ќеожиданне поведение функции.\n");
+    }
+
+    // Ex. 4
+
+    int m;
+
+    do {
+        printf("\n¬ведите номер мес€ца от 1 до 12, или введите 0 дл€ выхода: ");
+        scanf("%d", &m);
+
+        if (m >= 0 && m <= 12) {
+            printf("Ёто %s.\n", seasonsDetection(m));
+            break;
+        } else if (m == 0) {
+            printf("«авершение работы...");
+            break;
+        } else {
+            printf("¬ведЄн некорректный номер мес€ца.\n");
+        }
+    } while (m < 0 || m > 12);
+
+    // Ex. 5
+
+    int age;
+
+    printf("\n¬ведите свой возраст: ");
+    scanf("%d", &age);
+
+    printf("¬ам %d %s.\n", age, agesAdd(age));
+
     // Ex. 6
 
-//    int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
-//
-//    printf("\n¬ведите координаты €чейки x1: ");
-//    scanf("%d", &x1);
-//    printf("¬ведите координаты €чейки y1: ");
-//    scanf("%d", &y1);
-//    printf("¬ведите координаты €чейки x2: ");
-//    scanf("%d", &x2);
-//    printf("¬ведите координаты €чейки y2: ");
-//    scanf("%d", &y2);
-//
-//    char *isColor = checkColorCells(x1, y1);
-//    char *isSameOrNot = checkCells(x1, x2, y1, y2);
-//
-//    printf("÷вет €чеек игрового пол€ %s Ц %s.\n", isSameOrNot, isSameOrNot == "одинаковый" ? isColor : "\b\b\b");
-//
     int x1 = 0, x2 = 0, y1 = 0, y2 = 0;
 
     printf("\n¬ведите координаты €чейки x1: ");
@@ -372,52 +335,52 @@ int main() {
 
     printf("÷вет €чеек игрового пол€ %s - %s.", checkCells(x1, x2, y1, y2), checkColorCells(x1, x2, y1, y2));
 
-//    // Ex. 7
-//
-//    int n;
-//    int k;
-//    int quotient;
-//    int remainder;
-//
-//    do {
-//        printf("\n¬ведите sizeY (положительное число): ");
-//        scanf("%d", &n);
-//        printf("¬ведите K (положительное число): ");
-//        scanf("%d", &k);
-//    } while (n <= 0 || k <= 0);
-//
-//    quotient = fancyQuotient(n, k);
-//    remainder = fancyRemainder(n, k);
-//
-//    printf("sizeY / K: целое от делени€ = %d, остаток от делени€ = %d.\n", quotient, remainder);
-//
-//    // Ex. 8
-//
-//    int number;
-//    int positiveOrNo;
-//
-//    do {
-//        printf("\n¬ведите sizeY (положительное число): ");
-//        scanf("%d", &number);
-//
-//        positiveOrNo = divideNumsTF(number);
-//    } while (number <= 0);
-//
-//    printf("sizeY содержит %s", (positiveOrNo == 0) ? "чЄтные цифры Ц False.\n" : "нечЄтные цифры - True.\n");
-//
-//    // Ex. 9
-//
-//    int max = 100;
-//    int i;
-//
-//    for (i = 0; i < 20; i++) {
-//        printf("%d, ", getRandom(i, max));
-//    }
-//    printf("\b\b\n");
-//
-//    // Ex. 10
-//
-//    amNums();
+    // Ex. 7
+
+    int n;
+    int k;
+    int quotient;
+    int remainder;
+
+    do {
+        printf("\n¬ведите sizeY (положительное число): ");
+        scanf("%d", &n);
+        printf("¬ведите K (положительное число): ");
+        scanf("%d", &k);
+    } while (n <= 0 || k <= 0);
+
+    quotient = fancyQuotient(n, k);
+    remainder = fancyRemainder(n, k);
+
+    printf("sizeY / K: целое от делени€ = %d, остаток от делени€ = %d.\n", quotient, remainder);
+
+    // Ex. 8
+
+    int number;
+    int positiveOrNo;
+
+    do {
+        printf("\n¬ведите sizeY (положительное число): ");
+        scanf("%d", &number);
+
+        positiveOrNo = divideNumsTF(number);
+    } while (number <= 0);
+
+    printf("sizeY содержит %s", (positiveOrNo == 0) ? "чЄтные цифры Ц False.\n" : "нечЄтные цифры - True.\n");
+
+    // Ex. 9
+
+    int max = 100;
+    int i;
+
+    for (i = 0; i < 20; i++) {
+        printf("%d, ", getRandom(i, max));
+    }
+    printf("\b\b\n");
+
+    // Ex. 10
+
+    amNums();
 
     return 0;
 }
