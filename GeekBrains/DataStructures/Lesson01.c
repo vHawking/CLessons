@@ -59,7 +59,7 @@ float squareRoot(float n) {
     return x;
 }
 
-char* quadEquation(float a, float b, float c, float *root1, float *root2) {
+char *quadEquation(float a, float b, float c, float *root1, float *root2) {
     if (a != 0) {
         float d = b * b - 4 * a * c;
 
