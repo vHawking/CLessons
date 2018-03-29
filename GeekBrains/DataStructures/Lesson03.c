@@ -46,8 +46,26 @@ void printArray(int *arr, int len) {
 
 // Вывод счетчика в консоль.
 
+char *counterVars(int counter) {
+    int x1;
+    int x2;
+
+    x1 = counter % 10;
+    x2 = counter % 100;
+
+    if (x1 == 1 && x2 != 11) {
+        return "цикл";
+    } else if (x1 >= 2 && x1 <= 4 && (x2 < 10 || x2 >= 20)) {
+        return "цикла";
+    } else {
+        return "циклов";
+    }
+}
+
+// Вывод счетчика в консоль.
+
 void printCounter(int counter) {
-    printf("Количество операций – %d циклов.\n", counter);
+    printf("Количество операций – %d %s.\n", counter, counterVars(counter));
 }
 
 // Функция обмена местами соседних элементов массива.

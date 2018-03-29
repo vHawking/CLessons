@@ -55,7 +55,7 @@ int recursePow(int a1, int b1) {
 int recursePowEven(int a2, int b2) {
 
     if (b2 == 0) {
-      return 1;
+        return 1;
     } else if (b2 % 2 == 0) {
         return recursePowEven(a2 * a2, b2 >> 1);
     } else {
