@@ -34,10 +34,10 @@ void setBarrier(int barrier[sizeY][sizeX]) {
         for (j = 0; j < sizeX; j++) {
             barrier[i][j] = 1;
         }
-        barrier[1][1] = 0;
-        barrier[2][3] = 0;
-        barrier[3][1] = 0;
     }
+    barrier[1][1] = 0;
+    barrier[2][3] = 0;
+    barrier[3][1] = 0;
 }
 
 // Обходим барьеры рекурсивной функцией
@@ -73,15 +73,15 @@ int main() {
     int j;
 
     // Ставим препятствия
-    
+
     setBarrier(barriers);
 
     // Заполняем основной массив препятствиями и маршрутами обхода
-    
+
     fillArr(arr, barriers);
 
     // Печатаем массив
-    
+
     printf("Количество ходов короля с препятствиями:\n\n");
     for (i = 0; i < sizeY; i++) {
         for (j = 0; j < sizeX; j++) {
