@@ -44,12 +44,11 @@ void printArray(int *arr, int len) {
     printf("\b\b]\n");
 }
 
-// Вывод счетчика в консоль.
+// Пишем функцию для склонения слова «цикл» в зависимости от его числового значения.
 
 char *counterVars(int counter) {
     int x1;
     int x2;
-
     x1 = counter % 10;
     x2 = counter % 100;
 
