@@ -161,22 +161,22 @@ int main() {
 
     // Задание 2
 
-//    Node *arr[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-//    Node *Tree = NULL;
-//    FILE *file = fopen("../data.txt", "r");
-//    if (file == NULL) {
-//        puts("Can't open file!");
-//        exit(1);
-//    }
-//    int count;
-//    fscanf(file, "%d", &count); // Считываем количество записей
-//    int i;
-//    for (i = 0; i < count; i++) {
-//        int value;
-//        fscanf(file, "%d", &value);
-//        insert(&Tree, value);
-//    }
-//    fclose(file);
+    Node *arr[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    Node *Tree = NULL;
+    FILE *file = fopen("../database/data.txt", "r");
+    if (file == NULL) {
+        puts("Can't open file!");
+        exit(1);
+    }
+    int count;
+    fscanf(file, "%d", &count); // Считываем количество записей
+    int i;
+    for (i = 0; i < count; i++) {
+        int value;
+        fscanf(file, "%d", &value);
+        insert(&Tree, value);
+    }
+    fclose(file);
 
     printf("\n");
 
