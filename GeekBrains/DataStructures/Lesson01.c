@@ -175,18 +175,18 @@ int fancyRemainder(int n, int k) {
 }
 
 /*
- * 8. Дано целое число sizeY (> 0). С помощью операций деления нацело и взятия остатка от деления определить, имеются ли
+ * 8. Дано целое число (N > 0). С помощью операций деления нацело и взятия остатка от деления определить, имеются ли
  * в записи числа sizeY нечетные цифры. Если имеются, то вывести True, если нет — вывести False.
  */
 
-int divideNumsTF(int number) {
+char *divideNumsTF(int number) {
     while (number > 0) {
         if (number % 2 != 0) {
-            return 1;
+            return "false";
         }
         number /= 10;
     }
-    return 0;
+    return "true";
 }
 
 /*
@@ -345,22 +345,20 @@ int main() {
 
     quotient = fancyQuotient(n, k);
     remainder = fancyRemainder(n, k);
-
     printf("sizeY / K: целое от деления = %d, остаток от деления = %d.\n\n", quotient, remainder);
 
     printf("Задание 8\n");
 
     int number;
-    int positiveOrNo;
+    char *positiveOrNo;
 
     do {
-        printf("Введите sizeY (положительное число): ");
+        printf("Введите N (положительное число): ");
         scanf("%d", &number);
-
-        positiveOrNo = divideNumsTF(number);
     } while (number <= 0);
 
-    printf("Число sizeY содержит %s.\n\n", (positiveOrNo == 0) ? "чётные цифры – False" : "нечётные цифры - True");
+    positiveOrNo = divideNumsTF(number);
+    printf("Число N содержит %s – %s.\n\n", (positiveOrNo == "false") ? "нечётные цифры" : "чётные цифры", positiveOrNo);
 
     printf("Задание 9\n");
 
