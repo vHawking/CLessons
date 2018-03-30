@@ -1,3 +1,11 @@
+/**
+ * Домашнее задание по курсу "Алгоритмы и структуры данных".
+ *
+ * @version Лекция №5.
+ * @author Вадим Ястребов.
+ * @date 15.03.2018 г.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,8 +17,8 @@ const int BRACES_VALID = -1;
 struct Node {
     T data;
     int index;
-    struct Node* next;
-    struct Node* prev;
+    struct Node *next;
+    struct Node *prev;
 };
 
 typedef struct Node Node;
@@ -21,10 +29,10 @@ typedef struct List {
     int size;
 } List;
 
-void push(List* lst, T value){
-    Node* tmp = (Node*) malloc(sizeof(Node));
-    if(tmp == NULL){
-        puts("Stack Overflow");
+void push(List *lst, T value) {
+    Node *tmp = (Node *) malloc(sizeof(Node));
+    if (tmp == NULL) {
+        printf("Переполнение стека");
         return;
     }
     tmp->data = value;
@@ -39,16 +47,16 @@ void push(List* lst, T value){
     lst->size++;
 }
 
-T popS (List* lst) {
-    if(lst->size <= 0) {
-        puts("Stack is Empty");
+T popS(List *lst) {
+    if (lst->size <= 0) {
+        printf("Стек пуст");
         return -1;
     }
-    Node* tmp = NULL;
+    Node *tmp = NULL;
     T value = lst->head->data;
     tmp = lst->head;
     lst->head = lst->head->next;
-    if(lst->size > 1)
+    if (lst->size > 1)
         lst->head->prev = NULL;
     else
         lst->tail = NULL;
@@ -57,35 +65,11 @@ T popS (List* lst) {
     return value;
 }
 
-//5. *Реализовать очередь.
-T popQ (List* lst) {
-    if(lst->size <= 0) {
-        puts("Stack is Empty");
-        return -1;
-    }
-    Node* tmp = NULL;
-    T value = lst->tail->data;
-    tmp = lst->tail;
-    lst->tail = lst->tail->prev;
-    if(lst->size > 1)
-        lst->tail->next = NULL;
-    else
-        lst->head = NULL;
-    free(tmp);
-    lst->size--;
-    return value;
-}
+/*
+ * 1. Реализовать перевод из 10 в 2 систему счисления с использованием стека.
+ */
 
-void printList(List* st) {
-    Node *current = st->head;
-    while(current != NULL) {
-        printf("index: %d, value: %d \n",current->index, current->data);
-        current = current->next;
-    }
-    printf("--------\n");
-}
-
-void decToBin(long dec, char* bin) {
+void decToBin(long dec, char *bin) {
     List stack;
     stack.head = NULL;
     stack.tail = NULL;
@@ -99,15 +83,26 @@ void decToBin(long dec, char* bin) {
         strcat(bin, popS(&stack) ? "1" : "0");
 }
 
-int bracesCheck(char* expression) {
+/*
+ * 2. Написать программу, которая определяет, является ли введенная скобочная
+ * последовательность правильной. Примеры правильных скобочных
+ * выражений: (), ([])(), {}(), ([{}]),
+ * неправильных — )(, ())({), (, ])}), ([(])
+ * для скобок [,(,{.
+ * Например: (2+(2*2)) или [2/{5*(4+7)}]
+ */
+
+int bracesCheck(char *expression) {
     const int TYPES = 3;
-    char braces[][2] = {{'(',')'}, {'[',']'}, {'{','}'}};
+    char braces[][2] = {{'(', ')'},
+                        {'[', ']'},
+                        {'{', '}'}};
     List b;
     b.head = NULL;
     b.tail = NULL;
     b.size = 0;
 
-    while(*expression != '\0') {
+    while (*expression != '\0') {
         int i;
         for (i = 0; i < TYPES; i++)
             if (*expression == braces[i][0])
@@ -123,16 +118,15 @@ int bracesCheck(char* expression) {
             }
         expression++;
     }
-    //({})[]
-
     return BRACES_VALID;
 }
 
-void copyList(List* from, List* to) {
-    List temp;
-    temp.head = NULL;
-    temp.tail = NULL;
-    temp.size = 0;
+/*
+ * 4.* Создать функцию, копирующую односвязный список (то есть создает в памяти
+ * копию односвязного списка, без удаления первого списка).
+ */
+
+void copyList(List *from, List *to) {
 
     Node *current = from->tail;
     while (current != NULL) {
@@ -141,26 +135,28 @@ void copyList(List* from, List* to) {
     }
 }
 
+void printList(List *st) {
+    Node *current = st->head;
+    while (current != NULL) {
+        printf("Индекс: %d Значение: %d\n", current->index, current->data);
+        current = current->next;
+    }
+    printf("--------\n");
+}
+
 int main() {
-    //	1. Реализовать перевод из 10 в 2 систему счисления с использованием стека.
+
+    printf("Задание 1\n");
     char binary[64] = {"b'"};
     decToBin(11, binary);
-    printf("%s \n", binary);
+    printf("%s\n\n", binary);
 
-    /*	2. Написать программу, которая определяет, является ли введенная скобочная
-     * последовательность правильной. Примеры правильных скобочных
-     * выражений: (), ([])(), {}(), ([{}]),
-     * неправильных — )(, ())({), (, ])}), ([(])
-     * для скобок [,(,{.
-     * Например: (2+(2*2)) или [2/{5*(4+7)}]
-     */
-    printf("%d \n", bracesCheck(")"));
-    printf("%d \n", bracesCheck("{ ( [ {} [] () ] ) }"));
-    printf("%d \n", bracesCheck("(2 + (2 * 2))"));
+    printf("Задание 2\n");
+    printf("%d\n", bracesCheck(")"));
+    printf("%d\n", bracesCheck("{ ( [ {} [] () ] ) }"));
+    printf("%d\n\n", bracesCheck("(2 + (2 * 2))"));
 
-    /*	4. *Создать функцию, копирующую односвязный список (то есть создает в памяти
-     * копию односвязного списка, без удаления первого списка).
-     */
+    printf("Задание 4\n");
     int i;
     List f, t;
     f.head = NULL;
@@ -174,7 +170,6 @@ int main() {
         push(&f, i);
 
     copyList(&f, &t);
-
     printList(&f);
     printList(&t);
 
