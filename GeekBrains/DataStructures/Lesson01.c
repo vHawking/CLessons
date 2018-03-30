@@ -84,14 +84,22 @@ char *quadEquation(float a, float b, float c, float *root1, float *root2) {
  */
 
 char *seasonsDetection(int m) {
-    if (m >= 1 && m <= 2 || m == 12) {
-        return "Зима";
-    } else if (m >= 3 && m <= 5) {
-        return "Весна";
-    } else if (m >= 6 && m <= 8) {
-        return "Лето";
-    } else if (m >= 9 && m <= 11) {
-        return "Осень";
+    int month;
+
+    if (m <= 0 || m > 12) {
+        return "некорректное значение";
+    } else {
+        month = m % 12;
+
+        if (month == 0 && month <= 2) {
+            return "Зима";
+        } else if (m >= 3 && m <= 5) {
+            return "Весна";
+        } else if (m >= 6 && m <= 8) {
+            return "Лето";
+        } else if (m >= 9 && m <= 11) {
+            return "Осень";
+        }
     }
 }
 
@@ -293,20 +301,9 @@ int main() {
 
     int m;
 
-    do {
-        printf("Введите номер месяца от 1 до 12, или введите 0 для выхода: ");
-        scanf("%d", &m);
-
-        if (m > 0 && m <= 12) {
-            printf("Это %s.\n\n", seasonsDetection(m));
-            break;
-        } else if (m == 0) {
-            printf("Выход из программы.\n\n");
-            break;
-        } else {
-            printf("Введён некорректный номер месяца.\n\n");
-        }
-    } while (m < 0 || m > 12);
+    printf("Введите номер месяца от 1 до 12: ");
+    scanf("%d", &m);
+    printf("Это %s.\n", seasonsDetection(m));
 
     printf("Задание 5\n");
 
