@@ -303,7 +303,7 @@ int main() {
 
     printf("Введите номер месяца от 1 до 12: ");
     scanf("%d", &m);
-    printf("Это %s.\n", seasonsDetection(m));
+    printf("Это %s.\n\n", seasonsDetection(m));
 
     printf("Задание 5\n");
 
