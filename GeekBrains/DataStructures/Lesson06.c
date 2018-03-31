@@ -11,14 +11,16 @@
 #include <stdlib.h>
 #include <locale.h>
 
-#define SIZE 10
+#define SIZE 15
+
+int arr[SIZE] = {15, 8, 4, 2, 1, 3, 6, 5, 7, 12, 10, 9, 11, 14, 13};
+int i = 0;
 
 typedef int T;
 typedef struct Node {
     T data;
     struct Node *left;
     struct Node *right;
-    struct Node *parent;
 } Node;
 
 /*
@@ -39,50 +41,7 @@ long simpleHash(char *string) {
  * 2. Переписать программу, реализующее двоичное дерево поиска:
  *      а) Добавить в него обход дерева различными способами;
  *      б) Реализовать поиск в двоичном дереве поиска;
- *      в) *Добавить в программу указания из какого файла считывать данные, каким образом обходить дерево.
  */
-
-// Создание нового узла
-
-Node *getFreeNode(T value, Node *parent) {
-    Node *tmp = (Node *) malloc(sizeof(Node));
-    tmp->left = tmp->right = NULL;
-    tmp->data = value;
-    tmp->parent = parent;
-    return tmp;
-}
-
-// Вставка узла
-
-void insert(Node **head, int value) {
-    Node *tmp = NULL;
-    if (*head == NULL) {
-        *head = getFreeNode(value, NULL);
-        return;
-    }
-    tmp = *head;
-    while (tmp) {
-        if (value > tmp->data) {
-            if (tmp->right) {
-                tmp = tmp->right;
-                continue;
-            } else {
-                tmp->right = getFreeNode(value, tmp);
-                return;
-            }
-        } else if (value < tmp->data) {
-            if (tmp->left) {
-                tmp = tmp->left;
-                continue;
-            } else {
-                tmp->left = getFreeNode(value, tmp);
-                return;
-            }
-        } else {
-            exit(2); // дерево построено неправильно
-        }
-    }
-}
 
 void preOrderTravers(Node *root) {
     if (root) {
@@ -108,10 +67,8 @@ void endOrderTravers(Node *root) {
     }
 }
 
-int arr[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-int i = 0;
-Node* tree (int n) {
-    Node* newNode;
+Node *tree(int n) {
+    Node *newNode;
     int value;
     int nL;
     int nR;
@@ -121,7 +78,7 @@ Node* tree (int n) {
         value = arr[i++];
         nL = n / 2;
         nR = n - nL - 1;
-        newNode = (Node*)malloc(sizeof(Node));
+        newNode = (Node *) malloc(sizeof(Node));
         newNode->data = value;
         newNode->left = tree(nL);
         newNode->right = tree(nR);
@@ -150,46 +107,36 @@ void printTree(Node *root) {
     }
 }
 
+int searchTree(Node *root, int value) {
+    int result = 0;
+    if (root) {
+        result = searchTree(root->right, value);
+        if (result == 0)
+            result = searchTree(root->left, value);
+        if (root->data == value)
+            result = 1;
+    }
+    return result;
+}
+
 int main() {
     setlocale(LC_ALL, "Russian");
     setbuf(stdout, NULL);
 
-    // Задание 1
-
+    printf("Задание 1\n");
     char *string = "Hello everybody";
-    printf("Сума кодов символов строки \"%s\" = %li.\n", string, simpleHash(string));
+    printf("Сума кодов символов строки \"%s\" = %li.\n\n", string, simpleHash(string));
 
-    // Задание 2
+    printf("Задание 2\n");
+    Node *greatTree = tree(SIZE);
 
-    Node *arr[SIZE] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    Node *Tree = NULL;
-    FILE *file = fopen("../database/data.txt", "r");
-    if (file == NULL) {
-        puts("Can't open file!");
-        exit(1);
-    }
-    int count;
-    fscanf(file, "%d", &count); // Считываем количество записей
-    int i;
-    for (i = 0; i < count; i++) {
-        int value;
-        fscanf(file, "%d", &value);
-        insert(&Tree, value);
-    }
-    fclose(file);
-
+    printTree(greatTree);
     printf("\n");
 
-    printTree(Tree);
-    printf("\n\nPreOrderTravers: \t");
-    preOrderTravers(Tree);
-
-    printf("\nInOrderTravers: \t");
-    insideOrderTravers(Tree);
-
-    printf("\nPostOrderTravers: \t");
-    endOrderTravers(Tree);
-
+    int i;
+    for (i = 0; i < SIZE + 1; i++) {
+        printf("%d ", searchTree(greatTree, i));
+    }
     printf("\n");
     return 0;
 }
