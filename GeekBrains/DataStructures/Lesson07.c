@@ -176,7 +176,7 @@ MatrixNode *transformMatrix(int size) {
             if (matrix[i][j]) {
                 p = (MatrixNode *) malloc(sizeof(MatrixNode));
                 if (!p) {
-                    puts("Memory fail");
+                    puts("Ошибка памяти.\n");
                     exit(1);
                 }
                 p->next = m;
@@ -193,7 +193,7 @@ MatrixNode *transformMatrix(int size) {
 void printTransform(MatrixNode *p) {
     MatrixNode *m = p;
     while (m) {
-        printf("%c->%c: %d\n", m->from, m->to, m->len);
+        printf("%c->%c:%d\n", m->from, m->to, m->len);
         m = m->next;
     }
 }
