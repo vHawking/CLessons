@@ -103,7 +103,7 @@ void printDesk() {
     for (int i = 0; i < He; i++) {
         for (int j = 0; j < Wi; j++)
             printf("%3d ", desk[i][j]);
-        puts("");
+        printf("\n");
     }
 }
 
